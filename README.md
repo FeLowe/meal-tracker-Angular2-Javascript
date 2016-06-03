@@ -6,7 +6,7 @@
 
 ## Description
 
-This is a meal tracker application where users are able to log foods they eat each day with details about the meal including its number of calories. Food are only logged for one day - this app does not keep track of multiple days' meals.
+This is a meal tracker application that users are able to log foods they eat each day with details about the meal including its number of calories. Food are only logged for one day - this application does not keep track of multiple days' meals.
 
 ## Setup/Installation Requirements
 
