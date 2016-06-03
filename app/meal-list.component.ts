@@ -10,23 +10,23 @@ import {HealthyPipe} from './healthy.pipe';
   selector: 'meal-list',
   inputs: ['mealList'],
   outputs: ['onMealSelect'],
-  directives: [MealComponent, EditMealDetailsComponent, NewMealComponent],
   pipes: [HealthyPipe],
+  directives: [MealComponent, EditMealDetailsComponent, NewMealComponent],
   template: `
+  <label>Meal filter:</label>
   <select (change)="onChange($event.target.value)">
-    <option value="all">All</option>
+    <option value="all" selected="selected">All</option>
     <option value="healthy">Healthy</option>
-    <option value="notHealthy" selected="selected">Not Healthy</option>
+    <option value="notHealthy">Not Healthy</option>
   </select>
-  <meal-display *ngFor="#currentMeal of mealList"
+  <meal-display *ngFor="#currentMeal of mealList | healthy:filterHealthy"
     (click)="mealClicked(currentMeal)"
     [class.selected]='currentMeal === selectedMeal'
     [meal]='currentMeal'>
   </meal-display>
   <edit-meal-details *ngIf="selectedMeal" [meal]="selectedMeal">
   </edit-meal-details>
-  <new-meal (onSubmitNewMeal)="createMeal($event)">
-  </new-meal>
+  <new-meal (onSubmitNewMeal)="createMeal($event)"></new-meal>
   `
 })
 
@@ -34,7 +34,7 @@ export class MealListComponent {
   public mealList: Meal[];
   public onMealSelect: EventEmitter<Meal>;
   public selectedMeal: Meal;
-  public filterHealthy: string = "notHealthy";
+  public filterHealthy: string = "all";
   constructor(){
     this.onMealSelect = new EventEmitter();
   }
@@ -48,6 +48,5 @@ export class MealListComponent {
   }
   onChange(filterOptionByUserSelection) {
   this.filterHealthy = filterOptionByUserSelection;
-  console.log(this.filterHealthy);
   }
 }

@@ -11,16 +11,16 @@ export class HealthyPipe implements PipeTransform {
     var userDropDownSelection = args[0];
     if (userDropDownSelection === 'healthy'){
       return mealList.filter((meal) =>{
-        return meal.healthy;
+        // return meal.healthy;
+        return meal.calories <= 500;
       });
     } else if (userDropDownSelection === 'notHealthy'){
         return mealList.filter((meal) =>{
-          return !meal.healthy;
+          // return !meal.healthy;
+          return meal.calories > 500;
       });
     } else {
       return mealList;
     }
-
   }
-
 }
